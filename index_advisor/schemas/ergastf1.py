@@ -1,0 +1,350 @@
+from .schema import Column, DatabaseSchema, TableSchema, add_table_stats
+
+
+ergastf1_schema = DatabaseSchema(
+    "ergastf1",
+    table_count=14,
+    tables=[
+        TableSchema(
+            "circuits",
+            [
+                Column(name="alt", typ="integer"),
+                Column(name="circuitid", typ="integer"),
+                Column(name="circuitref", typ="character varying"),
+                Column(name="country", typ="character varying"),
+                Column(name="lat", typ="double precision"),
+                Column(name="lng", typ="double precision"),
+                Column(name="location", typ="character varying"),
+                Column(name="name", typ="character varying"),
+                Column(name="url", typ="character varying"),
+            ],
+            primary_key="circuitid",
+        ),
+        TableSchema(
+            "constructorresults",
+            [
+                Column(name="constructorid", typ="integer"),
+                Column(name="constructorresultsid", typ="integer"),
+                Column(name="points", typ="double precision"),
+                Column(name="raceid", typ="integer"),
+                Column(name="status", typ="character varying"),
+            ],
+            primary_key="constructorresultsid",
+        ),
+        TableSchema(
+            "constructors",
+            [
+                Column(name="constructorid", typ="integer"),
+                Column(name="constructorref", typ="character varying"),
+                Column(name="name", typ="character varying"),
+                Column(name="nationality", typ="character varying"),
+                Column(name="url", typ="character varying"),
+            ],
+            primary_key="constructorid",
+        ),
+        TableSchema(
+            "constructorstandings",
+            [
+                Column(name="constructorid", typ="integer"),
+                Column(name="constructorstandingsid", typ="integer"),
+                Column(name="points", typ="double precision"),
+                Column(name="position", typ="integer"),
+                Column(name="positiontext", typ="character varying"),
+                Column(name="raceid", typ="integer"),
+                Column(name="wins", typ="integer"),
+            ],
+            primary_key="constructorstandingsid",
+        ),
+        TableSchema(
+            "drivers",
+            [
+                Column(name="code", typ="character varying"),
+                Column(name="dob", typ="date"),
+                Column(name="driverid", typ="integer"),
+                Column(name="driverref", typ="character varying"),
+                Column(name="forename", typ="character varying"),
+                Column(name="nationality", typ="character varying"),
+                Column(name="number", typ="integer"),
+                Column(name="surname", typ="character varying"),
+                Column(name="url", typ="character varying"),
+            ],
+            primary_key="driverid",
+        ),
+        TableSchema(
+            "driverstandings",
+            [
+                Column(name="driverid", typ="integer"),
+                Column(name="driverstandingsid", typ="integer"),
+                Column(name="points", typ="double precision"),
+                Column(name="position", typ="integer"),
+                Column(name="positiontext", typ="character varying"),
+                Column(name="raceid", typ="integer"),
+                Column(name="wins", typ="integer"),
+            ],
+            primary_key="driverstandingsid",
+        ),
+        TableSchema(
+            "laptimes",
+            [
+                Column(name="driverid", typ="integer"),
+                Column(name="lap", typ="integer"),
+                Column(name="milliseconds", typ="integer"),
+                Column(name="position", typ="integer"),
+                Column(name="raceid", typ="integer"),
+                Column(name="time", typ="character varying"),
+            ],
+            primary_key=["raceid", "driverid", "lap"],
+        ),
+        TableSchema(
+            "pitstops",
+            [
+                Column(name="driverid", typ="integer"),
+                Column(name="duration", typ="character varying"),
+                Column(name="lap", typ="integer"),
+                Column(name="milliseconds", typ="integer"),
+                Column(name="raceid", typ="integer"),
+                Column(name="stop", typ="integer"),
+                Column(name="time", typ="interval"),
+            ],
+            primary_key=["raceid", "driverid", "stop"],
+        ),
+        TableSchema(
+            "qualifying",
+            [
+                Column(name="constructorid", typ="integer"),
+                Column(name="driverid", typ="integer"),
+                Column(name="number", typ="integer"),
+                Column(name="position", typ="integer"),
+                Column(name="q1", typ="character varying"),
+                Column(name="q2", typ="character varying"),
+                Column(name="q3", typ="character varying"),
+                Column(name="qualifyid", typ="integer"),
+                Column(name="raceid", typ="integer"),
+            ],
+            primary_key="qualifyid",
+        ),
+        TableSchema(
+            "races",
+            [
+                Column(name="circuitid", typ="integer"),
+                Column(name="date", typ="date"),
+                Column(name="name", typ="character varying"),
+                Column(name="raceid", typ="integer"),
+                Column(name="round", typ="integer"),
+                Column(name="time", typ="interval"),
+                Column(name="url", typ="character varying"),
+                Column(name="year", typ="integer"),
+            ],
+            primary_key="raceid",
+        ),
+        TableSchema(
+            "results",
+            [
+                Column(name="constructorid", typ="integer"),
+                Column(name="driverid", typ="integer"),
+                Column(name="fastestlap", typ="integer"),
+                Column(name="fastestlapspeed", typ="character varying"),
+                Column(name="fastestlaptime", typ="character varying"),
+                Column(name="grid", typ="integer"),
+                Column(name="laps", typ="integer"),
+                Column(name="milliseconds", typ="integer"),
+                Column(name="number", typ="integer"),
+                Column(name="points", typ="double precision"),
+                Column(name="position", typ="integer"),
+                Column(name="positionorder", typ="integer"),
+                Column(name="positiontext", typ="character varying"),
+                Column(name="raceid", typ="integer"),
+                Column(name="rank", typ="integer"),
+                Column(name="resultid", typ="integer"),
+                Column(name="statusid", typ="integer"),
+                Column(name="time", typ="character varying"),
+            ],
+            primary_key="resultid",
+        ),
+        TableSchema(
+            "seasons",
+            [
+                Column(name="url", typ="character varying"),
+                Column(name="year", typ="integer"),
+            ],
+            primary_key="year",
+        ),
+        TableSchema(
+            "status",
+            [
+                Column(name="status", typ="character varying"),
+                Column(name="statusid", typ="integer"),
+            ],
+            primary_key="statusid",
+        ),
+        TableSchema(
+            "target",
+            [
+                Column(name="driverid", typ="integer"),
+                Column(name="raceid", typ="integer"),
+                Column(name="targetid", typ="integer"),
+                Column(name="win", typ="integer"),
+            ],
+            primary_key="targetid",
+        ),
+    ],
+    index_count=14,
+    indexes=[],
+)
+add_table_stats(
+    ergastf1_schema,
+    "circuits",
+    73,
+    {
+        "location": 70,
+        "alt": 1,
+        "circuitref": 73,
+        "country": 32,
+        "lat": 72,
+        "lng": 72,
+        "circuitid": 73,
+        "name": 73,
+        "url": 73,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "constructorresults",
+    11082,
+    {"status": 1, "constructorid": 172, "raceid": 907, "constructorresultsid": 11082, "points": 45},
+)
+add_table_stats(
+    ergastf1_schema,
+    "constructors",
+    208,
+    {"constructorref": 208, "nationality": 24, "constructorid": 208, "name": 208, "url": 171},
+)
+add_table_stats(
+    ergastf1_schema,
+    "constructorstandings",
+    11836,
+    {
+        "constructorstandingsid": 11836,
+        "constructorid": 156,
+        "raceid": 906,
+        "position": 22,
+        "wins": 20,
+        "positiontext": 23,
+        "points": 436,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "drivers",
+    840,
+    {
+        "nationality": 41,
+        "surname": 784,
+        "driverid": 840,
+        "dob": 821,
+        "driverref": 840,
+        "number": 36,
+        "forename": 465,
+        "url": 839,
+        "code": 80,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "driverstandings",
+    31578,
+    {
+        "raceid": 970,
+        "position": 108,
+        "driverid": 833,
+        "wins": 14,
+        "positiontext": 109,
+        "driverstandingsid": 31578,
+        "points": 337,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "laptimes",
+    420369,
+    {"lap": 78, "raceid": 389, "position": 24, "driverid": 121, "time": 67578, "milliseconds": 67578},
+)
+add_table_stats(
+    ergastf1_schema,
+    "pitstops",
+    6070,
+    {
+        "lap": 73,
+        "stop": 6,
+        "duration": 4713,
+        "raceid": 131,
+        "driverid": 54,
+        "time": 4872,
+        "milliseconds": 4713,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "qualifying",
+    7397,
+    {
+        "qualifyid": 7397,
+        "constructorid": 41,
+        "raceid": 339,
+        "q1": 6635,
+        "position": 28,
+        "driverid": 151,
+        "number": 48,
+        "q2": 3402,
+        "q3": 2065,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "races",
+    976,
+    {"raceid": 976, "date": 976, "year": 68, "round": 21, "circuitid": 72, "time": 20, "name": 42, "url": 976},
+)
+add_table_stats(
+    ergastf1_schema,
+    "results",
+    23657,
+    {
+        "fastestlapspeed": 5045,
+        "positionorder": 39,
+        "laps": 172,
+        "constructorid": 207,
+        "grid": 35,
+        "raceid": 970,
+        "position": 33,
+        "fastestlap": 77,
+        "driverid": 840,
+        "fastestlaptime": 4955,
+        "statusid": 132,
+        "rank": 25,
+        "positiontext": 39,
+        "number": 128,
+        "resultid": 23657,
+        "time": 5755,
+        "points": 33,
+        "milliseconds": 5923,
+    },
+)
+add_table_stats(
+    ergastf1_schema,
+    "seasons",
+    68,
+    {"year": 68, "url": 68},
+)
+add_table_stats(
+    ergastf1_schema,
+    "status",
+    134,
+    {"status": 134, "statusid": 134},
+)
+add_table_stats(
+    ergastf1_schema,
+    "target",
+    31578,
+    {"targetid": 31578, "raceid": 970, "win": 2, "driverid": 833},
+)

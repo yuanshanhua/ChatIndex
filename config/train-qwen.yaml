@@ -1,0 +1,53 @@
+### 关键参数
+per_device_train_batch_size: 2 # 3 在 A6000 上 OOM
+gradient_accumulation_steps: 2 # 梯度累积步数
+learning_rate: 4.0e-5
+num_train_epochs: 500.0
+# adapter_name_or_path: saves/qwen2.5-7b-Instruct-lora-ppo/checkpoint-200
+dataset: dataset_mm
+
+## 多模态相关
+freeze_multi_modal_projector: false # 是否冻结多模态投影层
+
+## debug
+print_param_status: true # 打印参数状态
+
+### model
+model_name_or_path: models/qwen2.5-7b-instruct
+reward_model: http
+reward_model_type: api
+trust_remote_code: true
+ppo_score_norm: true
+
+### method
+stage: ppo
+do_train: true
+finetuning_type: lora
+lora_target: all
+
+### dataset
+template: qwen
+cutoff_len: 8192 # 避免长输入被截断
+max_samples: 100000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: saves/qwen2.5-7b-Instruct-lora-ppo
+logging_steps: 10
+save_steps: 100
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+lr_scheduler_type: cosine
+# warmup_ratio: 0.1
+warmup_steps: 100
+bf16: true
+ddp_timeout: 180000000
+
+### generate
+max_new_tokens: 1024
+temperature: 0.95
+top_k: 50
+top_p: 1.0

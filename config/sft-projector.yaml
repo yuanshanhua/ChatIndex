@@ -1,0 +1,48 @@
+### 关键参数
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 1 # 梯度累积步数
+learning_rate: 1.0e-4
+num_train_epochs: 100.0
+warmup_ratio: 0.1
+dataset: sft_dataset
+
+## 多模态相关
+freeze_multi_modal_projector: false # 是否冻结多模态投影层
+
+## debug
+print_param_status: false # 打印参数状态
+
+### model
+model_name_or_path: models/qwen2.5-7b-instruct
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: freeze
+freeze_trainable_layers: 0
+
+### dataset
+template: qwen
+cutoff_len: 8192 # 避免长输入被截断
+max_samples: 100000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: saves/qwen2.5-7b-Instruct-sft-projector
+logging_steps: 10
+save_steps: 100
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+lr_scheduler_type: cosine
+bf16: true
+ddp_timeout: 180000000
+
+### generate
+max_new_tokens: 1024
+temperature: 0.95
+top_k: 50
+top_p: 1.0

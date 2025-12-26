@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "index-advisor"
+version = "0.1.0"
+authors = [{ name = "yuanshanhua" }]
+license = "MIT"
+requires-python = "~=3.10.0"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "psycopg[binary,pool]",
+    "pymysql>=1.1.2",
+    "pytest>=8.4.2",
+    "sqlglot[rs]",
+    "sqlparse>=0.5.4",
+]
+
+[project.scripts]
+ia-visualize = "scripts.visualize:main"
+gen-workloads = "scripts.gen.workloads:run"
+gen-merge = "scripts.gen.merge:run"
+gen-add-labels = "scripts.gen.add_labels:run"
+gen-column-embeddings = "scripts.gen.column_embeddings:main"
+gen-sql-embeddings = "scripts.gen.sql_embeddings:main"
+gen-schema = "scripts.gen.schema:main"
+eval-summary = "scripts.eval_summary:main"
+eval-sft = "scripts.eval_sft:main"
+eval-res = "scripts.eval_res:main"
+analyze-files = "scripts.utils.analyze_files:main"
+compare-tensors = "scripts.utils.compare_safetensors:main"
+plot-logs = "scripts.utils.plot_train_logs:main"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 119
+indent-width = 4
+
+[tool.ruff.lint]
+ignore = ["C408", "C901", "E501", "E731", "E741", "W605"]
+select = ["C", "E", "F", "I", "W"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+known-first-party = ["llamafactory"]
+known-third-party = [
+    "accelerate",
+    "datasets",
+    "gradio",
+    "numpy",
+    "peft",
+    "torch",
+    "transformers",
+    "trl",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+skip-magic-trailing-comma = false
+line-ending = "auto"

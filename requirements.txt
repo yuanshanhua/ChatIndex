@@ -1,0 +1,5 @@
+psycopg[binary,pool]
+sqlglot[rs]
+pytest
+PyMySQL
+prompt_toolkit

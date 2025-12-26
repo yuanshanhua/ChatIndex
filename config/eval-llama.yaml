@@ -1,0 +1,10 @@
+model_name_or_path: models/llama-3.1-8b-instruct
+# adapter_name_or_path: saves/llama3.1-8b-Instruct-lora-ppo/checkpoint-900
+
+template: llama3
+
+### generate
+max_new_tokens: 1024
+temperature: 0.1
+top_k: 50
+top_p: 1.0

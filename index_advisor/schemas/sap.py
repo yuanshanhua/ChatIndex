@@ -1,0 +1,86 @@
+from .schema import Column, DatabaseSchema, TableSchema
+
+
+sap_schema = DatabaseSchema(
+    "sap",
+    table_count=5,
+    tables=[
+        TableSchema(
+            "customers",
+            [
+                Column(name="age", typ="integer"),
+                Column(name="data1", typ="double precision"),
+                Column(name="data2", typ="double precision"),
+                Column(name="data3", typ="double precision"),
+                Column(name="educationnum", typ="integer"),
+                Column(name="geoid", typ="integer"),
+                Column(name="id", typ="integer"),
+                Column(name="marital_status", typ="character varying"),
+                Column(name="nom1", typ="character varying"),
+                Column(name="nom2", typ="character varying"),
+                Column(name="nom3", typ="character varying"),
+                Column(name="occupation", typ="character varying"),
+                Column(name="sex", typ="character varying"),
+            ],
+            primary_key="id",
+        ),
+        TableSchema(
+            "demog",
+            [
+                Column(name="a_var1", typ="double precision"),
+                Column(name="a_var10", typ="double precision"),
+                Column(name="a_var11", typ="double precision"),
+                Column(name="a_var12", typ="double precision"),
+                Column(name="a_var13", typ="double precision"),
+                Column(name="a_var14", typ="double precision"),
+                Column(name="a_var15", typ="double precision"),
+                Column(name="a_var16", typ="double precision"),
+                Column(name="a_var17", typ="double precision"),
+                Column(name="a_var18", typ="double precision"),
+                Column(name="a_var2", typ="double precision"),
+                Column(name="a_var3", typ="double precision"),
+                Column(name="a_var4", typ="double precision"),
+                Column(name="a_var5", typ="double precision"),
+                Column(name="a_var6", typ="double precision"),
+                Column(name="a_var7", typ="double precision"),
+                Column(name="a_var8", typ="double precision"),
+                Column(name="a_var9", typ="double precision"),
+                Column(name="geoid", typ="integer"),
+                Column(name="income_k", typ="numeric"),
+                Column(name="inhabitants_k", typ="double precision"),
+            ],
+            primary_key="geoid",
+        ),
+        TableSchema(
+            "mailings1_2",
+            [
+                Column(name="kxindex", typ="integer"),
+                Column(name="ref_date", typ="timestamp without time zone"),
+                Column(name="refid", typ="integer"),
+                Column(name="response", typ="character varying"),
+            ],
+            primary_key="refid",
+        ),
+        TableSchema(
+            "mailings3",
+            [
+                Column(name="ref_date", typ="timestamp without time zone"),
+                Column(name="refid", typ="integer"),
+                Column(name="response", typ="character varying"),
+            ],
+            primary_key="refid",
+        ),
+        TableSchema(
+            "sales",
+            [
+                Column(name="amount", typ="double precision"),
+                Column(name="event_date", typ="timestamp without time zone"),
+                Column(name="eventid", typ="integer"),
+                Column(name="refid", typ="integer"),
+            ],
+            primary_key="eventid",
+        ),
+    ],
+    index_count=5,
+    indexes=[],
+)

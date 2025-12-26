@@ -1,0 +1,10 @@
+model_name_or_path: models/qwen2.5-7b-instruct
+adapter_name_or_path: saves/sft_6000/checkpoint-100
+
+template: qwen
+
+### generate
+max_new_tokens: 200
+temperature: 0.1
+top_k: 30
+top_p: 1.0
